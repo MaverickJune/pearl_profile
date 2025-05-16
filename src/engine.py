@@ -4,6 +4,7 @@ import warnings
 transformers.utils.logging.set_verbosity(40)
 warnings.filterwarnings("ignore")
 from transformers import AutoModelForCausalLM, AutoTokenizer
+from models.modeling_llama import LlamaForCausalLM
 from abc import ABC, abstractmethod
 from accelerate import Accelerator
 from .kvcache import KVCacheModel

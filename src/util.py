@@ -25,6 +25,9 @@ def model_zoo(args):
         "deepseek-1.3b": 32256,
         "deepseek-6.7b": 32256,
         "deepseek-33b": 32256,
+        "meta-llama/Llama-3.2-1B": 128256,
+        "meta-llama/Llama-3.2-3B": 128256,
+        "meta-llama/Llama-3.1-8B": 128256,
     }
     
     zoo = {
@@ -36,6 +39,9 @@ def model_zoo(args):
         "deepseek-1.3b": "{REPLACE THIS WITH THE MODEL PATH IN YOUR ENVIRONMENT}",
         "deepseek-6.7b": "{REPLACE THIS WITH THE MODEL PATH IN YOUR ENVIRONMENT}",
         "deepseek-33b": "{REPLACE THIS WITH THE MODEL PATH IN YOUR ENVIRONMENT}",
+        "meta-llama/Llama-3.2-1B": "meta-llama/Llama-3.2-1B",
+        "meta-llama/Llama-3.2-3B": "meta-llama/Llama-3.2-3B",
+        "meta-llama/Llama-3.1-8B": "meta-llama/Llama-3.1-8B",
     }
 
     args.vocab_size = vocab_size[args.draft_model]
@@ -46,7 +52,7 @@ def parse_arguments():
     """Specified arguments for running scripts."""
     parser = argparse.ArgumentParser(description='args for this file')
     
-    parser.add_argument('--data_path', type=str, default="{REPLACE THIS WITH YOUR DATA PATH}")
+    parser.add_argument('--data_path', type=str, default="/home/nxclab/wonjun/ParallelSpeculativeDecoding/data")
 
     parser.add_argument('--draft_model', type=str, default="codellama-7b")
     parser.add_argument('--target_model', type=str, default="codellama-70b")
@@ -60,6 +66,7 @@ def parse_arguments():
     parser.add_argument('--top_k', type=int, default=0, help='top_k for ungreedy sampling strategy.')
     parser.add_argument('--top_p', type=float, default=0.95, help='top_p for ungreedy sampling strategy.')
     parser.add_argument('--gamma', type=int, default=4, help='guess time.')
+    parser.add_argument('--num_samples', type=int, default=20, help='number of samples for each task.')
     args = parser.parse_args()
     args.exp_name = os.path.join(os.getcwd(), "exp", args.exp_name)
     os.makedirs(args.exp_name, exist_ok=True)
