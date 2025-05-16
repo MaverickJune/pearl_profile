@@ -196,7 +196,7 @@ class Decoding(ABC):
                 self.target_forward_times += 1
             
             self.accelerator.wait_for_everyone()
-
+            
             # verification
             all_prob = self.accelerator.gather(prob).to(device)
             draft_ids = all_prob[0, [0], 1:self.args.gamma*2].int()
@@ -288,7 +288,7 @@ class Decoding(ABC):
                 self.target_forward_times += 1
             
             self.accelerator.wait_for_everyone()
-
+            
             # verification
             all_prob = self.accelerator.gather(prob).to(device)
             draft_ids = all_prob[0, [0], 1:self.args.gamma*2].int()
